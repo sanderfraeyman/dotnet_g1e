@@ -16,7 +16,7 @@ namespace dotnet_g1e.Models.AccountViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Gegevens onthouden")]
         public bool RememberMe { get; set; }
     }
 }
