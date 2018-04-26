@@ -9,7 +9,6 @@ namespace dotnet_g1e.Models.Domain
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Email { get; set; }
 
         public Teacher()
         {

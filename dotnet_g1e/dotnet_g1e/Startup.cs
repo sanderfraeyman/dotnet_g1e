@@ -55,6 +55,7 @@ namespace dotnet_g1e
             }
 
             breakoutboxDataInitializer.InitializeData().Wait();
+            //breakoutboxDataInitializer.InitializeUsers().Wait(); //easier to test when db doesnt have to be created
 
             app.UseStaticFiles();
 

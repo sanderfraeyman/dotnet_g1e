@@ -19,10 +19,10 @@ namespace dotnet_g1e.Data
             _userManager = userManager;
         }
 
-        private async Task InitializeUsers()
+        public async Task InitializeUsers()
         {
             string email = "admin@breakoutbox.com";
-            ApplicationUser user = new Teacher { UserName = email, Email = email, FirstName = "Peter", LastName = "Jansens" };
+            ApplicationUser user = new ApplicationUser { UserName = email, Email = email };
             await _userManager.CreateAsync(user, "P@sswo0rd");
 
             string email2 = "tyler@breakoutbox.com";
