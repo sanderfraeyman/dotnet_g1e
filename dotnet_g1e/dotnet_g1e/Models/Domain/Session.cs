@@ -19,7 +19,7 @@ public class Session
     public DateTime Date {
         get { return date; }
         set {
-            if (DateTime.Compare(value, DateTime.Now) < 0) throw new ArgumentException("Date can not be set in the past");
+           // if (DateTime.Compare(value, DateTime.Now) < 0) throw new ArgumentException("Date can not be set in the past");
             date = value;
         }
     }
