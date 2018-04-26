@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Session>
+@{
     ViewData["Title"] = "Home";
 }
 
@@ -11,110 +12,20 @@
 }
 else
 {
-    <div style="margin-top:1.4em;padding:0 ">
-        <table class="table ">
-            <thead class="thead-dark ">
-                <tr>
-                    <th>SessieNaam</th>
-                    <th>SessieCode</th>
-                    <th>Omschrijving</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <a href="# ">Sessie1</a>
-                    </td>
-                    <td>123456</td>
-                    <td>Enkele Wiskunde oefeningen</td>
-                    <td>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#join-modal">
-                            doe mee aan sessie
-                        </button>
-                        <div class="modal fade" id="join-modal" tabindex="-1" role="dialog" aria-labelledby="join-modal-label" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="join-modal-label"></h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <label for="usr">Je bent ingeschreven in de Sessie: Sessie1</label>
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td> <a href="# ">Nederlands Werkwoorden</a></td>
-                    <td>6547822</td>
-                    <td>Oefeningen dt</td>
-                </tr>
-                <tr>
-                    <td><a href="# ">Grammaire Frans</a></td>
-                    <td>55654631</td>
-                    <td>Voulez vous</td>
-                </tr>
-                <tr>
-                    <td>Stock session</td>
-                    <td>123456789</td>
-                    <td>Hello World</td>
-                </tr>
-                <tr>
-                    <td>Stock session</td>
-                    <td>123456789</td>
-                    <td>Hello World</td>
-                </tr>
-                <tr>
-                    <td>Stock session</td>
-                    <td>123456789</td>
-                    <td>Hello World</td>
-                </tr>
-                <tr>
-                    <td>Stock session</td>
-                    <td>123456789</td>
-                    <td>Hello World</td>
-                </tr>
-                <tr>
-                    <td>Stock session</td>
-                    <td>123456789</td>
-                    <td>Hello World</td>
-                </tr>
-                <tr>
-                    <td>Stock session</td>
-                    <td>123456789</td>
-                    <td>Hello World</td>
-                </tr>
-                <tr>
-                    <td>Stock session</td>
-                    <td>123456789</td>
-                    <td>Hello World</td>
-                </tr>
-                <tr>
-                    <td>Stock session</td>
-                    <td>123456789</td>
-                    <td>Hello World</td>
-                </tr>
-                <tr>
-                    <td>Stock session</td>
-                    <td>123456789</td>
-                    <td>Hello World</td>
-                </tr>
-                <tr>
-                    <td>Stock session</td>
-                    <td>123456789</td>
-                    <td>Hello World</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Activate</th>
+    </tr>
+    @foreach (var session in Model)
+    {
+        <tr>
+            <td>@session.Name</td>
+            <td>@session.Description</td>
+            <td><button class="alert">Activate</button></td>
+        </tr>
+    }
+</table>
+    
 }
