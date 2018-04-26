@@ -22,7 +22,7 @@ namespace dotnet_g1e.Data
         {
             string email = "admin@breakoutbox.com";
             ApplicationUser user = new ApplicationUser { UserName = email, Email = email };
-            await _userManager.CreateAsync(user, "P@sswoord");
+            await _userManager.CreateAsync(user, "P@sswo0rd");
         }
 
         public async Task InitializeData()
