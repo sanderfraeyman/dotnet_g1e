@@ -7,9 +7,7 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <div>
-        <h1>Admin signed in, below should be the table of session a teacher can activate</h1>
-    </div>
+    @await Html.PartialAsync("_TeacherPartial")
 }
 else
 {
