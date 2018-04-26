@@ -1,4 +1,5 @@
 ﻿using dotnet_g1e.Models;
+using dotnet_g1e.Models.Domain;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace dotnet_g1e.Data
         private async Task InitializeUsers()
         {
             string email = "admin@breakoutbox.com";
-            ApplicationUser user = new ApplicationUser { UserName = email, Email = email };
+            ApplicationUser user = new Teacher { UserName = email, Email = email, FirstName = "Peter", LastName = "Jansens" };
             await _userManager.CreateAsync(user, "P@sswo0rd");
         }
 
