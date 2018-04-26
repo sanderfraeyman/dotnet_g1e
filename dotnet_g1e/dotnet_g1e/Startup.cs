@@ -35,12 +35,13 @@ namespace dotnet_g1e
 
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddScoped<BreakoutboxDataInitializer>();   
 
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, BreakoutboxDataInitializer breakoutboxDataInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -52,6 +53,8 @@ namespace dotnet_g1e
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            breakoutboxDataInitializer.InitializeData().Wait();
 
             app.UseStaticFiles();
 
