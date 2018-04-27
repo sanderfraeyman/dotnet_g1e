@@ -28,6 +28,7 @@ public class Session
         get { return dateOfCreation; }
         private set { dateOfCreation = DateTime.Now; }
     }
+    public bool ActiveSession { get; set; }
     [NotMapped]
     public List<PlayGroup> Playgroups { get; set; }
     public Classgroup Classgroup { get; set; }

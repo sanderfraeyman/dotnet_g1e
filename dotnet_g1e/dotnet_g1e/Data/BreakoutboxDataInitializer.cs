@@ -146,9 +146,15 @@ namespace dotnet_g1e.Data
 
                 //SESSIONS
                 List<Session> sessions = new List<Session>();
-                for(int i = 0; i <= 3; i++)
+                for (int i = 0; i <= 3; i++)
                 {
-                    sessions.Add(new Session("FirstSession" + i, "Dit is een eerste sessie", new DateTime(), i==3?classGroups[i-1]:classGroups[i], groups, breakoutboxes[i]));
+                    sessions.Add(new Session("InactiveSession" + i, "Dit is een inactieve sessie", new DateTime(), i == 3 ? classGroups[i - 1] : classGroups[i], groups, breakoutboxes[i]));
+                }
+                for (int i = 0; i <= 3; i++)
+                {
+                    Session session = new Session("ActiveSession" + i, "Dit is een actieve sessie", new DateTime(), i == 3 ? classGroups[i - 1] : classGroups[i], groups, breakoutboxes[i]);
+                    session.ActiveSession = true;
+                    sessions.Add(session);
                 }
 
                 _dbContext.Sessions.AddRange(sessions);

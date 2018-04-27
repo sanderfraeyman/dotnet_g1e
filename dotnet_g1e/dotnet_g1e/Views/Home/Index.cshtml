@@ -12,6 +12,22 @@
 }
 else
 {
-<p>Pupil Sessions</p>
-    
+<table class="table table-striped">
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Join</th>
+    </tr>
+    @foreach (var session in Model)
+    {
+        if (session.ActiveSession == true)
+        {
+            <tr>
+                <td>@session.Name</td>
+                <td>@session.Description</td>
+                <td><button class="alert">Join</button></td>
+            </tr>
+        }
+    }
+</table>
 }
