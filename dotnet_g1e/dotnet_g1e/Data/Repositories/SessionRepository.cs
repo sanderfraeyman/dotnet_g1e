@@ -27,5 +27,10 @@ namespace dotnet_g1e.Data.Repositories
         {
             return _sessions.ToList();
         }
+
+        public void SaveChanges()
+        {
+            _dbContext.SaveChanges();
+        }
     }
 }

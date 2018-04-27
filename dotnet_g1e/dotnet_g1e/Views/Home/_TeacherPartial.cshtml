@@ -4,14 +4,26 @@
     <tr>
         <th>Name</th>
         <th>Description</th>
-        <th>Activate</th>
+        <th>Active</th>
+        <th></th>
     </tr>
     @foreach (var session in Model)
     {
-        <tr>
-            <td>@session.Name</td>
-            <td>@session.Description</td>
-            <td><button class="alert">Activate</button></td>
-        </tr>
+    <tr>
+        <td><a asp-controller="TeacherDetail" asp-action="Index" asp-route-id="@session.SessionId">@session.Name</a></td>
+        <td>@session.Description</td>
+        <td>
+            @if (session.ActiveSession == true)
+            {
+            <input type="checkbox" checked="checked" onclick="return false" />
+            }
+            else
+            {
+            <input type="checkbox"  onclick="return false" />
+            }
+        </td>
+        <td>
+            <a asp-controller="Home" asp-action="Activate" asp-route-id="@session.SessionId">Activate</a></td>
+    </tr>
     }
 </table>

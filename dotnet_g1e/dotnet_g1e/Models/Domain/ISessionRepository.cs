@@ -10,5 +10,6 @@ namespace dotnet_g1e.Models.Domain
         Session GetBy(int sessionId);
 
         IEnumerable<Session> GetAll();
+        void SaveChanges();
     }
 }

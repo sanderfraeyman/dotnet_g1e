@@ -24,6 +24,33 @@ namespace dotnet_g1e.Controllers
             return View(_sessionRepository.GetAll().ToList());
         }
 
+        public IActionResult Activate(int id)
+        {
+            Session session = _sessionRepository.GetBy(id);
+            if (session == null)
+                return NotFound();
+            ViewData[nameof(Session.Name)] = session.Name;
+            return View();
+        }
+
+        [HttpPost, ActionName("Activate")]
+        public IActionResult ActivateConfirmed(int id)
+        {
+            Session session = null;
+            try
+            {
+                session = _sessionRepository.GetBy(id);
+                session.ActiveSession = true;
+                _sessionRepository.SaveChanges();
+                TempData["message"] = $"You successfully activated {session.Name}.";
+            }
+            catch
+            {
+                TempData["error"] = $"Sorry, something went wrong, session {session?.Name} was not activated…";
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
