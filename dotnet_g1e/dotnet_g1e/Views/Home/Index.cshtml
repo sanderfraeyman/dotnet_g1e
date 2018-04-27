@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Session>
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Sessies";
 }
 
 @inject SignInManager<ApplicationUser> SignInManager
@@ -14,9 +14,9 @@ else
 {
 <table class="table table-striped">
     <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Join</th>
+        <th>Naam</th>
+        <th>Beschrijving</th>
+        <th></th>
     </tr>
     @foreach (var session in Model)
     {
@@ -25,7 +25,7 @@ else
             <tr>
                 <td>@session.Name</td>
                 <td>@session.Description</td>
-                <td><button class="alert">Join</button></td>
+                <td><a class="btn btn-primary pull-right btn-block">Neem deel</a></td>
             </tr>
         }
     }

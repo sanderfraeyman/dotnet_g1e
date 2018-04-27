@@ -2,9 +2,9 @@
 
 <table class="table table-striped">
     <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Active</th>
+        <th>Naam</th>
+        <th>Beschrijving</th>
+        <th>Actief</th>
         <th></th>
     </tr>
     @foreach (var session in Model)
@@ -25,11 +25,11 @@
         <td>
             @if (session.ActiveSession == true)
             {
-            <a class="alert-danger" asp-controller="Home" asp-action="Deactivate" asp-route-id="@session.SessionId">Deactivate</a>
+            <a class="btn btn-danger pull-right btn-block" asp-controller="Home" asp-action="Deactivate" asp-route-id="@session.SessionId">Deactiveer</a>
             }
             else
             {
-            <a asp-controller="Home" asp-action="Activate" asp-route-id="@session.SessionId">Activate</a>
+            <a class="btn btn-primary pull-right btn-block" asp-controller="Home" asp-action="Activate" asp-route-id="@session.SessionId">Activeer</a>
             }
         </td>
     </tr>
