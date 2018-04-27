@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Sessions - Teacher";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>
+    Please confirm you want to deactivate session @ViewData["Name"]...
+</h4>
+<form asp-action="Deactivate" method="post">
+    <div>
+        <button class="btn btn-primary" type="submit">Deactivate</button>
+        <a asp-action="Index" class="btn btn-default">Cancel</a>
+    </div>
+</form>

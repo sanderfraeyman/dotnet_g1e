@@ -23,7 +23,15 @@
             }
         </td>
         <td>
-            <a asp-controller="Home" asp-action="Activate" asp-route-id="@session.SessionId">Activate</a></td>
+            @if (session.ActiveSession == true)
+            {
+            <a class="alert-danger" asp-controller="Home" asp-action="Deactivate" asp-route-id="@session.SessionId">Deactivate</a>
+            }
+            else
+            {
+            <a asp-controller="Home" asp-action="Activate" asp-route-id="@session.SessionId">Activate</a>
+            }
+        </td>
     </tr>
     }
 </table>

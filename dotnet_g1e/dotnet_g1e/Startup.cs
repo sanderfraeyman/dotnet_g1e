@@ -44,8 +44,7 @@ namespace dotnet_g1e
                 .AddDefaultTokenProviders();
 
             services.AddAuthorization(options => {
-                options.AddPolicy("TeacherOnly", policy => policy.RequireClaim(ClaimTypes.Role, "teacher"));
-                options.AddPolicy("Pupil", policy => policy.RequireClaim(ClaimTypes.Role, "pupil"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "admin"));
             });
 
             // Add application services.
@@ -71,7 +70,6 @@ namespace dotnet_g1e
             }
 
             breakoutboxDataInitializer.InitializeData().Wait();
-            //breakoutboxDataInitializer.InitializeUsers().Wait(); //easier to test when db doesnt have to be created
 
             app.UseStaticFiles();
             app.UseStatusCodePages();

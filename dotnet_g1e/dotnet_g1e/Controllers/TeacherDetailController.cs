@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet_g1e.Controllers
 {
-    [Authorize(Policy = "TeacherOnly")]
+    [Authorize(Policy = "AdminOnly")]
     public class TeacherDetailController : Controller
     {
         public IActionResult Index()
