@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using dotnet_g1e.Data;
 using dotnet_g1e.Models;
 using dotnet_g1e.Services;
+using System.Security.Claims;
+using dotnet_g1e.Models.Domain;
+using dotnet_g1e.Data.Repositories;
 
 namespace dotnet_g1e
 {
@@ -40,9 +43,15 @@ namespace dotnet_g1e
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAuthorization(options => {
+                options.AddPolicy("TeacherOnly", policy => policy.RequireClaim(ClaimTypes.Role, "teacher"));
+                options.AddPolicy("Pupil", policy => policy.RequireClaim(ClaimTypes.Role, "pupil"));
+            });
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddScoped<BreakoutboxDataInitializer>();   
+            services.AddScoped<BreakoutboxDataInitializer>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
 
             services.AddMvc();
         }
@@ -65,7 +74,7 @@ namespace dotnet_g1e
             //breakoutboxDataInitializer.InitializeUsers().Wait(); //easier to test when db doesnt have to be created
 
             app.UseStaticFiles();
-
+            app.UseStatusCodePages();
             app.UseAuthentication();
 
             app.UseMvc(routes =>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace dotnet_g1e.Data
@@ -24,22 +25,27 @@ namespace dotnet_g1e.Data
             string email = "admin@breakoutbox.com";
             ApplicationUser user = new ApplicationUser { UserName = email, Email = email };
             await _userManager.CreateAsync(user, "P@sswo0rd");
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "teacher"));
 
             string email2 = "tyler@breakoutbox.com";
             ApplicationUser user2 = new ApplicationUser { UserName = email2, Email = email2 };
             await _userManager.CreateAsync(user2, "Tyler123");
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "teacher"));
 
             string email3 = "gregor@breakoutbox.com";
             ApplicationUser user3 = new ApplicationUser { UserName = email3, Email = email3 };
             await _userManager.CreateAsync(user3, "Gregor123");
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "teacher"));
 
             string email4 = "sander@breakoutbox.com";
             ApplicationUser user4 = new ApplicationUser { UserName = email4, Email = email4 };
             await _userManager.CreateAsync(user4, "Sander123");
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "teacher"));
 
             string email5 = "benjamin@breakoutbox.com";
             ApplicationUser user5 = new ApplicationUser { UserName = email5, Email = email5 };
             await _userManager.CreateAsync(user5, "Benjamin123");
+            await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "teacher"));
         }
 
         public async Task InitializeData()

@@ -8,24 +8,10 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    @await Html.PartialAsync("_TeacherPartial")
+    @await Html.PartialAsync("_TeacherPartial", Model)
 }
 else
 {
-<table class="table table-striped">
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Activate</th>
-    </tr>
-    @foreach (var session in Model)
-    {
-        <tr>
-            <td>@session.Name</td>
-            <td>@session.Description</td>
-            <td><button class="alert">Activate</button></td>
-        </tr>
-    }
-</table>
+<p>Pupil Sessions</p>
     
 }
