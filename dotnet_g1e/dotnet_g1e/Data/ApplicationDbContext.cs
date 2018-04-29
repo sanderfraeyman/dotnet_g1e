@@ -20,6 +20,8 @@ namespace dotnet_g1e.Data
         public DbSet<Models.Domain.Action> Actions { get; set; }
         public DbSet<PlayGroup> PlayGroups { get; set; }
         public DbSet<Classgroup> Classgroups { get; set; }
+        public DbSet<Pupil> Pupils { get; set; }
+        public DbSet<AccessCode> AccessCodes { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

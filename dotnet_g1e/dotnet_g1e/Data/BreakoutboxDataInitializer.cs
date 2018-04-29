@@ -160,6 +160,11 @@ namespace dotnet_g1e.Data
                 _dbContext.Sessions.AddRange(sessions);
                 _dbContext.Breakoutboxes.AddRange(breakoutboxes);
                 _dbContext.Exercises.AddRange(exercises);
+                _dbContext.Modifiers.AddRange(modifiers);
+                _dbContext.Pupils.AddRange(pupils);
+                _dbContext.Actions.AddRange(actions);
+                _dbContext.AccessCodes.AddRange(accessCodes);
+                _dbContext.PlayGroups.AddRange(groups);
                 _dbContext.SaveChanges();
             }
         }
