@@ -70,7 +70,7 @@ namespace dotnet_g1e.Data
                     Result<string> result = new Result<string>(String.Format("%d", i * 5));
                     Exercise mathExercise = new Exercise(String.Format("Optellingen_oefening%d", i), result, modifiers);
                     mathExercise.Course = "Wiskunde";
-                    mathExercise.TimeLimit = i+5;
+                    mathExercise.TimeLimit = i + 5;
                     exercises.Add(mathExercise);
                 }
                 for (int i = 0; i <= 1; i++)
@@ -81,23 +81,23 @@ namespace dotnet_g1e.Data
                     dutchExercise.TimeLimit = i + 5;
                     exercises.Add(dutchExercise);
                 }
-                    
-                for(int i = 0; i <= 2; i++)
+
+                for (int i = 0; i <= 2; i++)
                 {
                     Result<string> result = new Result<string>(String.Format("vocablist%d", i));
                     Exercise englishExercise = new Exercise(String.Format("Vocalbulary_Greeting_Exercise%d", i), result, modifiers);
                     englishExercise.Course = "Engels";
-                    englishExercise.TimeLimit = i+5;
+                    englishExercise.TimeLimit = i + 5;
                     exercises.Add(englishExercise);
 
                 }
-                    
-                for(int i = 0; i <= 2; i++)
+
+                for (int i = 0; i <= 2; i++)
                 {
                     Result<string> result = new Result<string>(String.Format("vocabulaire%d", i));
                     Exercise frenchExercise = new Exercise(String.Format("ConjuguerVerbes_exercices%d", i), result, modifiers);
                     frenchExercise.Course = "Frans";
-                    frenchExercise.TimeLimit = i+5;
+                    frenchExercise.TimeLimit = i + 5;
                     exercises.Add(frenchExercise);
 
                 }
@@ -113,7 +113,7 @@ namespace dotnet_g1e.Data
                 //CLASSGROUPS
                 List<Classgroup> classGroups = new List<Classgroup>();
                 classGroups.Add(new Classgroup("grender", pupils.GetRange(0, 1)));
-                classGroups.Add(new Classgroup("tyljamin", pupils.GetRange(1,2)));
+                classGroups.Add(new Classgroup("tyljamin", pupils.GetRange(1, 2)));
                 classGroups.Add(new Classgroup("PWII_E1", pupils.GetRange(0, 2)));
 
                 //PLAYGROUPS
@@ -125,21 +125,21 @@ namespace dotnet_g1e.Data
 
                 //ACTIONS
                 List<Models.Domain.Action> actions = new List<Models.Domain.Action>();
-                for(int i = 0; i <= 10; i++)
+                for (int i = 0; i <= 10; i++)
                 {
                     actions.Add(new Models.Domain.Action("Naam" + i, "Voer deze uit om je unieke code te verkrijgen"));
                 }
 
                 //ACCESSCODES
                 List<AccessCode> accessCodes = new List<AccessCode>();
-                for(int i = 0; i <= 10; i++)
+                for (int i = 0; i <= 10; i++)
                 {
                     accessCodes.Add(new AccessCode((i + 3) * 55 + ""));
                 }
 
                 //BREAKOUTBOXES
                 List<Breakoutbox> breakoutboxes = new List<Breakoutbox>();
-                for(int i = 0; i <= 3; i++)
+                for (int i = 0; i <= 3; i++)
                 {
                     breakoutboxes.Add(new Breakoutbox("FirstSession" + i, "Dit is een eerste oefenbox", actions, accessCodes, exercises));
                 }
@@ -156,6 +156,28 @@ namespace dotnet_g1e.Data
                     session.ActiveSession = true;
                     sessions.Add(session);
                 }
+
+                _dbContext.AddRange(
+                    new SessionPlayGroup { Session = sessions[0], PlayGroup = groups[0] },
+                    new SessionPlayGroup { Session = sessions[1], PlayGroup = groups[1] },
+                    new SessionPlayGroup { Session = sessions[2], PlayGroup = groups[2] },
+                    new SessionPlayGroup { Session = sessions[3], PlayGroup = groups[3] },
+                    new SessionPlayGroup { Session = sessions[4], PlayGroup = groups[2] },
+                    new SessionPlayGroup { Session = sessions[5], PlayGroup = groups[3] },
+                    new SessionPlayGroup { Session = sessions[6], PlayGroup = groups[1] },
+                    new SessionPlayGroup { Session = sessions[6], PlayGroup = groups[2] },
+                    new SessionPlayGroup { Session = sessions[6], PlayGroup = groups[3] },
+                    new SessionPlayGroup { Session = sessions[7], PlayGroup = groups[0] });
+
+                _dbContext.AddRange(
+                    new PlayGroupPupil { PlayGroup = groups[0], Pupil = pupils[0] },
+                    new PlayGroupPupil { PlayGroup = groups[0], Pupil = pupils[2] },
+                    new PlayGroupPupil { PlayGroup = groups[1], Pupil = pupils[3] },
+                    new PlayGroupPupil { PlayGroup = groups[1], Pupil = pupils[0] },
+                    new PlayGroupPupil { PlayGroup = groups[2], Pupil = pupils[2] },
+                    new PlayGroupPupil { PlayGroup = groups[2], Pupil = pupils[1] },
+                    new PlayGroupPupil { PlayGroup = groups[3], Pupil = pupils[3] },
+                    new PlayGroupPupil { PlayGroup = groups[3], Pupil = pupils[1] });
 
                 _dbContext.Sessions.AddRange(sessions);
                 _dbContext.Breakoutboxes.AddRange(breakoutboxes);

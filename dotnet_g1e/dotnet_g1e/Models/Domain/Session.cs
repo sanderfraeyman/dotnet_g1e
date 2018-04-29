@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Session
 {
     public int SessionId { get; private set; }
-    public List<SessionPlayGroup> SessionPlayGroups { get; set; }
+    public List<SessionPlayGroup> SessionPlayGroups { get; set; } = new List<SessionPlayGroup>();
     public string Name {
         get { return name; }
         set {

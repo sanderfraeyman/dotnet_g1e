@@ -18,6 +18,8 @@ namespace dotnet_g1e.Controllers
         public IActionResult Index(int id)
         {
             Session session = _sessionRepository.GetBy(id);
+            ViewData["playgroups"] = _sessionRepository.GetPlaygroupsFromSession(id).ToList();
+
             if (session == null)
             {
                 return NotFound();

@@ -10,6 +10,7 @@ namespace dotnet_g1e.Models.Domain
         Session GetBy(int sessionId);
 
         IEnumerable<Session> GetAll();
+        IEnumerable<PlayGroup> GetPlaygroupsFromSession(int id);
         void SaveChanges();
     }
 }
