@@ -18,7 +18,9 @@ namespace dotnet_g1e.Controllers
         public IActionResult Index(int id)
         {
             Session session = _sessionRepository.GetBy(id);
-            ViewData["playgroups"] = _sessionRepository.GetPlaygroupsFromSession(id).ToList();
+
+            ViewData["playgroups"] = _sessionRepository.GetPlaygroupsFromSession(id);
+            ViewData["pupils"] = _sessionRepository.GetPlaygroupsFromSession(id).SelectMany(s => s.PlayGroupPupils).Select(pp => pp.Pupil).ToList();
 
             if (session == null)
             {

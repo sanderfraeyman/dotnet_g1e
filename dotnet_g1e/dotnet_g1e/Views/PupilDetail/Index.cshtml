@@ -46,9 +46,13 @@
         <th>Member</th>
     </tr>
     @foreach (var group in ViewData["playgroups"] as IEnumerable<dotnet_g1e.Models.Domain.PlayGroup>)
-        {
+    {
             <tr>
                 <td>@group.Name</td>
+               @foreach (var pupil in ViewData["pupils"] as IEnumerable<dotnet_g1e.Models.Domain.Pupil>)
+                {
+                    <td>@pupil.FirstName</td>
+                }
             </tr>
         }
 </table>

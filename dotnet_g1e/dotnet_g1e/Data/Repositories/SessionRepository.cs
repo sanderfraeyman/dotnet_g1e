@@ -20,19 +20,19 @@ namespace dotnet_g1e.Data.Repositories
 
         public Session GetBy(int sessionId)
         {
-            return _sessions.Include(s => s.SessionPlayGroups).Include(s => s.Classgroup).SingleOrDefault(s => s.SessionId == sessionId);
+            return _sessions.Include(s => s.Classgroup).Include(s => s.SessionPlayGroups).ThenInclude(sp => sp.PlayGroup).ThenInclude(p => p.PlayGroupPupils).ThenInclude(pp => pp.Pupil).SingleOrDefault(s => s.SessionId == sessionId);
         }
 
         public IEnumerable<Session> GetAll()
         {
-            return _sessions.Include(s => s.Classgroup).Include(s => s.SessionPlayGroups).ThenInclude(sg => sg.PlayGroup).ToList();
+            return _sessions.Include(s => s.Classgroup).Include(s => s.SessionPlayGroups).ThenInclude(sg => sg.PlayGroup).ThenInclude(sg => sg.PlayGroupPupils).ThenInclude(sp => sp.Pupil).ToList();
         }
 
         public IEnumerable<PlayGroup> GetPlaygroupsFromSession(int id)
         {
             return _sessions.Where(s => s.SessionId == id)
                 .SelectMany(s => s.SessionPlayGroups)
-                .Select(sg => sg.PlayGroup);
+                .Select(sg => sg.PlayGroup).Include(t => t.PlayGroupPupils).ThenInclude(t => t.Pupil).ToList();
         }
 
         public void SaveChanges()
