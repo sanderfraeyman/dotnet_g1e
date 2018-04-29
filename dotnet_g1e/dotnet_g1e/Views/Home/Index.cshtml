@@ -23,7 +23,7 @@ else
         if (session.ActiveSession == true)
         {
             <tr>
-                <td>@session.Name</td>
+                <td><a asp-controller="PupilDetail" asp-action="Index" asp-route-id="@session.SessionId">@session.Name</a></td>
                 <td>@session.Description</td>
                 <td><a class="btn btn-primary pull-right btn-block">Neem deel</a></td>
             </tr>

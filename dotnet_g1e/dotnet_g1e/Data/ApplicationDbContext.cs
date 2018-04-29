@@ -16,6 +16,10 @@ namespace dotnet_g1e.Data
         public DbSet<Breakoutbox> Breakoutboxes { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Session> Sessions { get; set; }
+        public DbSet<Modifier> Modifiers { get; set; }
+        public DbSet<Models.Domain.Action> Actions { get; set; }
+        public DbSet<PlayGroup> PlayGroups { get; set; }
+        public DbSet<Classgroup> Classgroups { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
