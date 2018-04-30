@@ -31,12 +31,33 @@ namespace dotnet_g1e.Controllers
                 return View(session);
             }
         }
-
+        
         public IActionResult Join(int id)
         {
-            //adds pupil to group and sends the pupil back to the right detail screen
-
-            return RedirectToAction("PupilDetail", "Index", new { id = id });
+            Session session = _sessionRepository.GetBy(id);
+            if (session == null)
+                return NotFound();
+            ViewData[nameof(Session.Name)] = session.Name;
+            return View();
+        }
+        
+        [HttpPost, ActionName("Join")]
+        public IActionResult JoinConfirmed(int id)
+        {
+            Session session = null;
+            try
+            {
+                session = _sessionRepository.GetBy(id);
+                //set group as checked in
+                _sessionRepository.SaveChanges();
+                TempData["message"] = $"You successfully joined {session.Name}.";
+            }
+            catch
+            {
+                TempData["error"] = $"Sorry, something went wrong, session {session?.Name} was not activated…";
+            }
+            //sends the group to the waiting screen
+            return RedirectToAction("Play", "Index");
         }
     }
 }
