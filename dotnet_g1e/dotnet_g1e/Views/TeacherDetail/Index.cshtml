@@ -7,50 +7,55 @@
 
 <div class="col-md-6">
     <div class="form-group">
-        <label>Number:</label>
+        <label>Nummer:</label>
         <input class="form-control" value="@Model.SessionId" readonly />
     </div>
     <div class="form-group">
-        <label>Created on:</label>
+        <label>Aangemaakt op:</label>
         <input class="form-control" value="@Model.DateOfCreation" readonly />
     </div>
     <div class="form-group">
-        <label>Description:</label>
+        <label>Beschrijving:</label>
         <input class="form-control" value="@Model.Description" readonly />
     </div>
 </div>
     
 <div class="col-md-6">
     <div class="form-group">
-        <label>Name:</label>
+        <label>Naam:</label>
         <input class="form-control" value="@Model.Name" readonly />
     </div>
     <div class="form-group">
-        <label>Classgroup:</label>
-        <input class="form-control" value="@Model.Classgroup" readonly />
+        <label>Klasgroep:</label>
+        <input class="form-control" value="@Model.Classgroup.ClassgroupName" readonly />
     </div>
     <div class="form-group">
-        <label>Goals:</label>
+        <label>Doelen:</label>
         <input class="form-control" value="Zit blijkbaar nog niet in het project?" readonly />
     </div>
 </div>    
 
-<table class="table table-striped">
-    <tr>
-        <th>Group</th>
-        <th>Member</th>
-        <th>Member</th>
-        <th>Member</th>
-        <th>Member</th>
-        <th>Member</th>
-        <th>Member</th>
-    </tr>
-    @*@foreach (var group in Model.Playgroups)
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width: 20%">Groep</th>
+            <th style="width: 20%">Lid</th>
+            <th style="width: 20%">Lid</th>
+            <th style="width: 20%">Lid</th>
+            <th style="width: 20%">Lid</th>
+        </tr>
+    </thead>
+
+    @foreach (var group in ViewData["playgroups"] as IEnumerable<dotnet_g1e.Models.Domain.PlayGroup>)
     {
         <tr>
-            <td>@group.Name</td>
+            <th>@group.Name</th>
+            @foreach (var pupil in ViewData["pupils"] as IEnumerable<dotnet_g1e.Models.Domain.Pupil>)
+            {
+                <td>@pupil.FirstName</td>
+            }
         </tr>
-    }*@
+    }
 </table>
 
 <div>

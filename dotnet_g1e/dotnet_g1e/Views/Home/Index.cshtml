@@ -25,7 +25,7 @@ else
             <tr>
                 <td><a asp-controller="PupilDetail" asp-action="Index" asp-route-id="@session.SessionId">@session.Name</a></td>
                 <td>@session.Description</td>
-                <td><a class="btn btn-primary pull-right btn-block">Neem deel</a></td>
+                <td><a asp-controller="PupilDetail" asp-action="Index" asp-route-id="@session.SessionId" class="btn btn-primary pull-right btn-block">Neem deel</a></td>
             </tr>
         }
     }

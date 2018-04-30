@@ -31,5 +31,12 @@ namespace dotnet_g1e.Controllers
                 return View(session);
             }
         }
+
+        public IActionResult Join(int id)
+        {
+            //adds pupil to group and sends the pupil back to the right detail screen
+
+            return RedirectToAction("PupilDetail", "Index", new { id = id });
+        }
     }
 }
