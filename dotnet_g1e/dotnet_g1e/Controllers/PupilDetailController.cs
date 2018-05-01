@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using dotnet_g1e.Models.Domain;
+using dotnet_g1e.Models.PupilDetailViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet_g1e.Controllers
@@ -15,7 +16,33 @@ namespace dotnet_g1e.Controllers
         {
             _sessionRepository = sessionRepository;
         }
-        public IActionResult Index(int id)
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(IndexViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //checks if there is a result to match the code
+                    Session result = _sessionRepository.GetBy(model.Id);
+                }
+                catch (Exception)
+                {
+                    return View(nameof(WrongCode));
+                }
+                return RedirectToAction("PupilDetail", "Detail", new { id = model.Id });
+            }
+            return View(nameof(WrongCode));
+        }
+
+        public IActionResult Detail(int id)
         {
             Session session = _sessionRepository.GetBy(id);
 
@@ -58,6 +85,11 @@ namespace dotnet_g1e.Controllers
             }
             //sends the group to the waiting screen
             return RedirectToAction("Play", "Index");
+        }
+
+        public IActionResult WrongCode()
+        {
+            return View();
         }
     }
 }

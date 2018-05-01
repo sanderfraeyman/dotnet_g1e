@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Session>
+
 @{
     ViewData["Title"] = "Sessies";
 }
@@ -12,22 +13,6 @@
 }
 else
 {
-<table class="table table-striped">
-    <tr>
-        <th>Naam</th>
-        <th>Beschrijving</th>
-        <th></th>
-    </tr>
-    @foreach (var session in Model)
-    {
-        if (session.ActiveSession == true)
-        {
-            <tr>
-                <td><a asp-controller="PupilDetail" asp-action="Index" asp-route-id="@session.SessionId">@session.Name</a></td>
-                <td>@session.Description</td>
-                <td><a asp-controller="PupilDetail" asp-action="Index" asp-route-id="@session.SessionId" class="btn btn-primary pull-right btn-block">Neem deel</a></td>
-            </tr>
-        }
-    }
-</table>
+    <div><br /><a class="btn btn-primary" asp-controller="PupilDetail" asp-action="Index">Neem deel aan een sessie</a></div>
+    
 }

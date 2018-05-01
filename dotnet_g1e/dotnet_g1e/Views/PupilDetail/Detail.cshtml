@@ -1,0 +1,60 @@
+﻿@model Session
+@{
+    ViewData["Title"] = "Sessie Detail - Leerling";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <div class="form-group">
+        <label>Nummer:</label>
+        <input class="form-control" value="@Model.SessionId" readonly />
+    </div>
+    <div class="form-group">
+        <label>Naam:</label>
+        <input class="form-control" value="@Model.Name" readonly />
+    </div>
+    <div class="form-group">
+        <label>Klasgroep:</label>
+        <input class="form-control" value="@Model.Classgroup.ClassgroupName" readonly />
+    </div>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width: 10%">Groep</th>
+            <th style="width: 18%">Lid</th>
+            <th style="width: 18%">Lid</th>
+            <th style="width: 18%">Lid</th>
+            <th style="width: 18%">Lid</th>
+            <th style="width: 18%">Deelnemen</th>
+        </tr>
+    </thead>
+    
+    @foreach (var group in ViewData["playgroups"] as IEnumerable<dotnet_g1e.Models.Domain.PlayGroup>)
+    {
+    <tr>
+        <th>@group.Name</th>
+        @foreach (var pupil in ViewData["pupils"] as IEnumerable<dotnet_g1e.Models.Domain.Pupil>)
+        {
+        <td>@pupil.FirstName</td>
+        }
+        <td>
+        @*@if (group.Pupils.Count() < 4)
+        {
+            <a asp-controller="PupilDetail" asp-action="Join" asp-route-id="@group.PlayGroupId" class="btn btn-default">Neem deel</a>
+        }
+        else
+        {
+            Groep vol!
+        }*@
+        </td>
+    </tr>
+    }
+</table>
+
+<div>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-default">Cancel</a>
+</div>
+
