@@ -1,22 +1,36 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using dotnet_g1e.Models;
+using System.Threading.Tasks;
 using dotnet_g1e.Models.Domain;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace dotnet_g1e.Controllers
 {
-    public class HomeController : Controller
+    //[Authorize(Policy = "AdminOnly")]
+    public class TeacherDetailController : Controller
     {
         private readonly ISessionRepository _sessionRepository;
-        public HomeController(ISessionRepository sessionRepository)
+        public TeacherDetailController(ISessionRepository sessionRepository)
         {
             _sessionRepository = sessionRepository;
         }
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            
-            return View(_sessionRepository.GetAll().ToList());
+            Session session = _sessionRepository.GetBy(id);
+
+            ViewData["playgroups"] = _sessionRepository.GetPlaygroupsFromSession(id);
+            ViewData["pupils"] = _sessionRepository.GetPlaygroupsFromSession(id).SelectMany(s => s.PlayGroupPupils).Select(pp => pp.Pupil).ToList();
+
+            if (session == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return View(session);
+            }
         }
 
         //[Authorize(Policy = "AdminOnly")]
@@ -75,11 +89,6 @@ namespace dotnet_g1e.Controllers
                 TempData["error"] = $"Sorry, something went wrong, session {session?.Name} was not deactivated…";
             }
             return RedirectToAction(nameof(Index));
-        }
-
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

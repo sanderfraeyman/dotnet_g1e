@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Session
 {
     public int SessionId { get; private set; }
-    public List<SessionPlayGroup> SessionPlayGroups { get; set; }
+    public List<SessionPlayGroup> SessionPlayGroups { get; set; } = new List<SessionPlayGroup>();
     public string Name {
         get { return name; }
         set {
@@ -19,7 +19,7 @@ public class Session
     public DateTime Date {
         get { return date; }
         set {
-            if (DateTime.Compare(value, DateTime.Now) < 0) throw new ArgumentException("Date can not be set in the past");
+           // if (DateTime.Compare(value, DateTime.Now) < 0) throw new ArgumentException("Date can not be set in the past");
             date = value;
         }
     }
@@ -28,6 +28,7 @@ public class Session
         get { return dateOfCreation; }
         private set { dateOfCreation = DateTime.Now; }
     }
+    public bool ActiveSession { get; set; }
     [NotMapped]
     public List<PlayGroup> Playgroups { get; set; }
     public Classgroup Classgroup { get; set; }

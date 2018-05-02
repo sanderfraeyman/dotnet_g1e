@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "Sessies - Leerkracht";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>
+    Bevestig dat u sessie: @ViewData["Name"] wilt deactiveren...
+</h4>
+<form asp-action="Deactivate" method="post">
+    <div>
+        <button class="btn btn-primary" type="submit">Deactiveer</button>
+        <a asp-action="Index" class="btn btn-default">Cancel</a>
+    </div>
+</form>

@@ -8,7 +8,7 @@ namespace dotnet_g1e.Models.Domain
     {
         public int PlayGroupId { get; private set; }
         public List<PlayGroupPupil> PlayGroupPupils { get; set; }
-        public List<SessionPlayGroup> SessionPlayGroups { get; set; }
+        public List<SessionPlayGroup> SessionPlayGroups { get; set; } = new List<SessionPlayGroup>();
         public string Name { get; private set; }
         [NotMapped]
         public List<Pupil> Pupils { get; private set; }

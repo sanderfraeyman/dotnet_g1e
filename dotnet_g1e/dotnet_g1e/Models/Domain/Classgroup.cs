@@ -8,7 +8,7 @@ namespace dotnet_g1e.Models.Domain
     {
         public int ClassGroupId { get; private set; }
         public List<ClassGroupPupil> ClassGroupPupils { get; set; }
-        private string ClassgroupName { get; set; }
+        public string ClassgroupName { get; private set; }
         [NotMapped]
         private List<Pupil> Pupils { get; set; }
 

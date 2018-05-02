@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using dotnet_g1e.Data;
 using dotnet_g1e.Models;
 using dotnet_g1e.Services;
+using System.Security.Claims;
+using dotnet_g1e.Models.Domain;
+using dotnet_g1e.Data.Repositories;
 
 namespace dotnet_g1e
 {
@@ -29,13 +32,25 @@ namespace dotnet_g1e
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(o =>
+            {
+                o.Password.RequireDigit = false;
+                o.Password.RequireLowercase = false;
+                o.Password.RequireUppercase = false;
+                o.Password.RequireNonAlphanumeric = false;
+                o.Password.RequiredLength = 6;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAuthorization(options => {
+                options.AddPolicy("AdminOnly", policy => policy.RequireClaim(ClaimTypes.Role, "admin"));
+            });
+
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
-            services.AddScoped<BreakoutboxDataInitializer>();   
+            services.AddScoped<BreakoutboxDataInitializer>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
 
             services.AddMvc();
         }
@@ -57,7 +72,7 @@ namespace dotnet_g1e
             breakoutboxDataInitializer.InitializeData().Wait();
 
             app.UseStaticFiles();
-
+            app.UseStatusCodePages();
             app.UseAuthentication();
 
             app.UseMvc(routes =>

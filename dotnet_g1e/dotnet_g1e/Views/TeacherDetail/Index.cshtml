@@ -1,0 +1,72 @@
+﻿@model Session
+@{
+    ViewData["Title"] = "Sessie Detail - Leerkracht";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Nummer:</label>
+        <input class="form-control" value="@Model.SessionId" readonly />
+    </div>
+    <div class="form-group">
+        <label>Aangemaakt op:</label>
+        <input class="form-control" value="@Model.DateOfCreation" readonly />
+    </div>
+    <div class="form-group">
+        <label>Beschrijving:</label>
+        <input class="form-control" value="@Model.Description" readonly />
+    </div>
+</div>
+    
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Naam:</label>
+        <input class="form-control" value="@Model.Name" readonly />
+    </div>
+    <div class="form-group">
+        <label>Klasgroep:</label>
+        <input class="form-control" value="@Model.Classgroup.ClassgroupName" readonly />
+    </div>
+    <div class="form-group">
+        <label>Doelen:</label>
+        <input class="form-control" value="Zit blijkbaar nog niet in het project?" readonly />
+    </div>
+</div>    
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width: 20%">Groep</th>
+            <th style="width: 20%">Lid</th>
+            <th style="width: 20%">Lid</th>
+            <th style="width: 20%">Lid</th>
+            <th style="width: 20%">Lid</th>
+        </tr>
+    </thead>
+
+    @foreach (var group in ViewData["playgroups"] as IEnumerable<dotnet_g1e.Models.Domain.PlayGroup>)
+    {
+        <tr>
+            <th>@group.Name</th>
+            @foreach (var pupil in ViewData["pupils"] as IEnumerable<dotnet_g1e.Models.Domain.Pupil>)
+            {
+                <td>@pupil.FirstName</td>
+            }
+        </tr>
+    }
+</table>
+
+<div>
+    @if (Model.ActiveSession == true)
+    {
+        <a class="btn btn-danger" asp-controller="Home" asp-action="Deactivate" asp-route-id="@Model.SessionId">Deactiveer</a>
+    }
+    else
+    {
+        <a class="btn btn-primary" asp-controller="Home" asp-action="Activate" asp-route-id="@Model.SessionId">Activeer</a>
+    }
+    <a asp-controller="Home" asp-action="Index" class="btn btn-default">Cancel</a>
+</div>
+

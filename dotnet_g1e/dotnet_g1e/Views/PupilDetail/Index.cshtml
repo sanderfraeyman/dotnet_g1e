@@ -1,0 +1,16 @@
+﻿@model dotnet_g1e.Models.PupilDetailViewModels.IndexViewModel
+@{ 
+    ViewData["Title"] = "Sessie Detail - Leerling";
+}
+
+<form asp-controller="PupilDetail" asp-action="Index" method="post">
+    <h4>Geef een actieve sessiecode om een aan een sessie deel te nemen</h4>
+    <hr />
+    <div class="form-group">
+        <label asp-for="Id">Code</label>
+        <input type="number" asp-for="Id" class="form-control" />
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Neem deel</button>
+    </div>
+</form>
