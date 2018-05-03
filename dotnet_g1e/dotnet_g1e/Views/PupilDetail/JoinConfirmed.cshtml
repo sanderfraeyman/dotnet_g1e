@@ -29,7 +29,6 @@
             <th style="width: 18%">Lid</th>
             <th style="width: 18%">Lid</th>
             <th style="width: 18%">Deelnemen</th>
-            <th style="width: 18%"></th>"
         </tr>
     </thead>
 
@@ -42,12 +41,7 @@
                 <td>@pupil.FirstName</td>
             }
             <td>
-                <a class="btn btn-default" asp-controller="PupilDetail" asp-action="Join" asp-route-id="@Model.SessionId" asp-route-gid="@group.PlayGroupId">Neem deel</a>
-            </td>
-            <td>
-                    @if (group.ActiveSession) {
-                        <p>In actieve Sessie</p>
-                     }
+                <a class="btn btn-default" asp-controller="PupilDetail" asp-action="Join" asp-route-id="@Model.SessionId">Neem deel</a>
             </td>
         </tr>
     }
@@ -56,4 +50,3 @@
 <div>
     <a asp-controller="Home" asp-action="Index" class="btn btn-default">Cancel</a>
 </div>
-

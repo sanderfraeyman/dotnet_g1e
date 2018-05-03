@@ -37,7 +37,9 @@ namespace dotnet_g1e.Controllers
                 {
                     return View(nameof(WrongCode));
                 }
-                return RedirectToAction("PupilDetail", "Detail", new { id = model.Id });
+                return RedirectToAction("Detail","PupilDetail",new { id=model.Id});
+                //return RedirectToAction("PupilDetail", "Detail", new { id = model.Id });
+               
             }
             return View(nameof(WrongCode));
         }
@@ -48,7 +50,6 @@ namespace dotnet_g1e.Controllers
 
             ViewData["playgroups"] = _sessionRepository.GetPlaygroupsFromSession(id);
             ViewData["pupils"] = _sessionRepository.GetPlaygroupsFromSession(id).SelectMany(s => s.PlayGroupPupils).Select(pp => pp.Pupil).ToList();
-
             if (session == null)
             {
                 return NotFound();
@@ -58,34 +59,34 @@ namespace dotnet_g1e.Controllers
                 return View(session);
             }
         }
-        
-        public IActionResult Join(int id)
+        [HttpGet, ActionName("Join")]
+        public IActionResult JoinConfirmed(int id,int gid)
         {
-            Session session = _sessionRepository.GetBy(id);
-            if (session == null)
-                return NotFound();
-            ViewData[nameof(Session.Name)] = session.Name;
-            return View();
+            ViewData["playgroups"] = _sessionRepository.GetPlaygroupsFromSession(id);
+            //ViewData["pupils"] = _sessionRepository.GetPlaygroupsFromSession(id).SelectMany(s => s.PlayGroupPupils).Select(pp => pp.Pupil).ToList();
+            _sessionRepository.GetPlaygroupsFromSession(id).Where(g => g.PlayGroupId == gid).Single().ActiveSession = true;
+            _sessionRepository.SaveChanges();
+            return RedirectToAction("Detail", "PupilDetail",new { id = id});
         }
         
-        [HttpPost, ActionName("Join")]
-        public IActionResult JoinConfirmed(int id)
-        {
-            Session session = null;
-            try
-            {
-                session = _sessionRepository.GetBy(id);
-                //set group as checked in
-                _sessionRepository.SaveChanges();
-                TempData["message"] = $"You successfully joined {session.Name}.";
-            }
-            catch
-            {
-                TempData["error"] = $"Sorry, something went wrong, session {session?.Name} was not activated…";
-            }
-            //sends the group to the waiting screen
-            return RedirectToAction("Play", "Index");
-        }
+        //[HttpPost, ActionName("Join")]
+        //public IActionResult JoinConfirmed(int id)
+        //{
+        //    Session session = null;
+        //    try
+        //    {
+        //        session = _sessionRepository.GetBy(id);
+        //        //set group as checked in
+        //        _sessionRepository.SaveChanges();
+        //        TempData["message"] = $"You successfully joined {session.Name}.";
+        //    }
+        //    catch
+        //    {
+        //        TempData["error"] = $"Sorry, something went wrong, session {session?.Name} was not activated…";
+        //    }
+        //    //sends the group to the waiting screen
+        //    return RedirectToAction("Play", "Index");
+        //}
 
         public IActionResult WrongCode()
         {

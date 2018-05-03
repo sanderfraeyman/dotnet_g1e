@@ -15,6 +15,14 @@ public class Session
             name = value;
         }
     }
+    public bool WaitingForGroups() {
+        foreach (PlayGroup group in this.Playgroups) {
+            if (group.ActiveSession) {
+                return false;
+            }
+        }
+        return false;
+    }
     public string Description { get; set; }
     public DateTime Date {
         get { return date; }

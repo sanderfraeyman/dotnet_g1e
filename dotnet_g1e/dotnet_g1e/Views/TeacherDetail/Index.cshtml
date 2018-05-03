@@ -61,11 +61,26 @@
 <div>
     @if (Model.ActiveSession == true)
     {
-        <a class="btn btn-danger" asp-controller="Home" asp-action="Deactivate" asp-route-id="@Model.SessionId">Deactiveer</a>
+        @if (Model.WaitingForGroups())
+        {
+            <p>Wachten op studenten</p>
+        }
+        else
+        {
+            <a class="btn btn-danger" asp-controller="Home" asp-action="Deactivate" asp-route-id="@Model.SessionId">Deactiveer</a>
+
+        }
     }
     else
     {
-        <a class="btn btn-primary" asp-controller="Home" asp-action="Activate" asp-route-id="@Model.SessionId">Activeer</a>
+        @if (Model.WaitingForGroups())
+        {
+            <p>Wachten op studenten</p>
+        }
+        else
+        {
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Activate" asp-route-id="@Model.SessionId">Activeer</a>
+        }
     }
     <a asp-controller="Home" asp-action="Index" class="btn btn-default">Cancel</a>
 </div>

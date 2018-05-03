@@ -7,6 +7,7 @@ namespace dotnet_g1e.Models.Domain
     public class PlayGroup
     {
         public int PlayGroupId { get; private set; }
+        public bool ActiveSession { get; set; }
         public List<PlayGroupPupil> PlayGroupPupils { get; set; }
         public List<SessionPlayGroup> SessionPlayGroups { get; set; } = new List<SessionPlayGroup>();
         public string Name { get; private set; }
