@@ -31,7 +31,7 @@
     </div>
     <div class="form-group">
         <label>Doelen:</label>
-        <input class="form-control" value="Zit blijkbaar nog niet in het project?" readonly />
+        <input class="form-control" value="To be added" readonly />
     </div>
 </div>    
 
@@ -61,26 +61,26 @@
 <div>
     @if (Model.ActiveSession == true)
     {
-        @if (Model.WaitingForGroups())
+        @*@if (Model.WaitingForGroups())
         {
             <p>Wachten op studenten</p>
         }
         else
-        {
+        {*@
             <a class="btn btn-danger" asp-controller="Home" asp-action="Deactivate" asp-route-id="@Model.SessionId">Deactiveer</a>
 
-        }
+        //}
     }
     else
     {
-        @if (Model.WaitingForGroups())
+        @*@if (Model.WaitingForGroups())
         {
             <p>Wachten op studenten</p>
         }
         else
-        {
+        {*@
             <a class="btn btn-primary" asp-controller="Home" asp-action="Activate" asp-route-id="@Model.SessionId">Activeer</a>
-        }
+        //}
     }
     <a asp-controller="Home" asp-action="Index" class="btn btn-default">Cancel</a>
 </div>
